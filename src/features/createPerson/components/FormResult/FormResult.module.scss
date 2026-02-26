@@ -1,0 +1,25 @@
+@use 'styles/variables' as *;
+
+.result {
+  padding: 24px;
+  background: $color-bg-white;
+  border: 1px solid $color-success;
+  border-radius: $border-radius-lg;
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $color-success;
+    margin-bottom: 16px;
+  }
+
+  &__json {
+    background: $color-bg;
+    padding: 16px;
+    border-radius: $border-radius;
+    font-size: $font-size-sm;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}

@@ -1,0 +1,11 @@
+@use 'styles/mixins' as *;
+
+.textarea {
+  @include input-base;
+  resize: vertical;
+  min-height: 32px;
+
+  &_error {
+    @include input-error;
+  }
+}

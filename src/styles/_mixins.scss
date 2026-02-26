@@ -1,0 +1,44 @@
+@use 'variables' as *;
+
+@mixin input-base {
+  width: 100%;
+  padding: 6px 0;
+  font-size: $font-size-lg;
+  font-family: $font-family;
+  color: $color-text;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $color-border;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+
+  &:focus {
+    border-bottom-color: $color-primary;
+  }
+
+  &:disabled {
+    color: $color-disabled-text;
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: $color-disabled-text;
+    font-size: $font-size-lg;
+  }
+}
+
+@mixin input-error {
+  border-bottom-color: $color-error;
+
+  &:focus {
+    border-bottom-color: $color-error;
+  }
+}
+
+@mixin respond-to($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}

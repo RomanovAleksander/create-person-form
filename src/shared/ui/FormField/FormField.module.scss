@@ -1,0 +1,63 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: fit-content;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 20px;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+
+  &__required {
+    color: $color-text-secondary;
+    margin-left: 1px;
+  }
+
+  &__input_wrap {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  &__input_wrap:has(select) &__icon {
+    right: 20px;
+  }
+
+  &__error, &__hint {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    white-space: pre-line;
+  }
+
+  &__error {
+    right: 0;
+    font-size: $font-size-sm;
+    color: $color-error;
+    text-align: right;
+  }
+
+  &__hint {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+}

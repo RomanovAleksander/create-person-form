@@ -1,0 +1,21 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.section {
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 500;
+    color: $color-text;
+    margin-bottom: 4px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px 24px;
+
+    @include respond-to($breakpoint-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
