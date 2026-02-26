@@ -36,7 +36,7 @@ export function CreatePersonForm() {
             <DocumentSection />
             <div className={styles.form__actions}>
               <Button type="submit" disabled={submitting || invalid}>
-                Створити персону
+                Створити
               </Button>
             </div>
           </form>
