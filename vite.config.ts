@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
+  base: '/create-person-form/',
   plugins: [react()],
   resolve: {
     alias: {
@@ -15,5 +16,8 @@ export default defineConfig({
         loadPaths: [resolve(__dirname, 'src')],
       },
     },
+  },
+  build: {
+    outDir: 'dist',
   },
 });
