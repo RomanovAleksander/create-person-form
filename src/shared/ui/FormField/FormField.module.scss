@@ -38,7 +38,7 @@
     flex-shrink: 0;
   }
 
-  &__input_wrap:has(select) &__icon {
+  &__input_wrap:has(:global(.react-select__control)) &__icon {
     right: 20px;
   }
 
