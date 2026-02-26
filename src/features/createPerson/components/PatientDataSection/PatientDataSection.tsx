@@ -1,47 +1,47 @@
-import { useField, useForm } from 'react-final-form';
-
 import clsx from 'clsx';
+import { useField, useForm } from 'react-final-form';
 
 import { DateInput, FormField, PhoneInput, SelectInput, TextInput, ToggleSwitch } from '@/shared/ui';
 
+import { FIELD_NAMES, FORM_FIELDS, SECTION_TITLES, SELECT_PLACEHOLDER } from '../../constants/formContent';
 import { CONTACT_METHOD_OPTIONS, GENDER_OPTIONS } from '../../constants/patientFields';
 import styles from './PatientDataSection.module.scss';
 
 export function PatientDataSection() {
   const form = useForm();
-  const hasMiddleName = useField('hasMiddleName').input.value;
-  const hasTaxId = useField('hasTaxId').input.value;
+  const hasMiddleName = useField(FIELD_NAMES.hasMiddleName).input.value;
+  const hasTaxId = useField(FIELD_NAMES.hasTaxId).input.value;
 
   const handleMiddleNameToggle = (checked: boolean) => {
-    form.change('hasMiddleName', checked);
-    if (!checked) form.change('middleName', '');
+    form.change(FIELD_NAMES.hasMiddleName, checked);
+    if (!checked) form.change(FIELD_NAMES.middleName, '');
   };
 
   const handleTaxIdToggle = (checked: boolean) => {
-    form.change('hasTaxId', checked);
-    if (!checked) form.change('taxId', '');
+    form.change(FIELD_NAMES.hasTaxId, checked);
+    if (!checked) form.change(FIELD_NAMES.taxId, '');
   };
 
-  const middleNameHint = hasMiddleName ? undefined : 'Немає по батькові згідно документів';
-  const taxIdHint = hasTaxId ? undefined : 'Немає ІПН за віком чи має відмітку у паспорті';
+  const middleNameHint = hasMiddleName ? undefined : FORM_FIELDS.middleName.hint;
+  const taxIdHint = hasTaxId ? undefined : FORM_FIELDS.taxId.hint;
 
   return (
     <section className={styles.section}>
-      <h2 className={styles.section__title}>Дані пацієнта</h2>
+      <h2 className={styles.section__title}>{SECTION_TITLES.patientData}</h2>
 
       <div className={styles.section__wrapper}>
         <div className={styles.section__grid}>
-          <FormField name="lastName" label="Прізвище" required>
+          <FormField name={FORM_FIELDS.lastName.name} label={FORM_FIELDS.lastName.label} required>
             {(props) => <TextInput {...props} />}
           </FormField>
 
-          <FormField name="firstName" label="Ім'я" required>
+          <FormField name={FORM_FIELDS.firstName.name} label={FORM_FIELDS.firstName.label} required>
             {(props) => <TextInput {...props} />}
           </FormField>
 
           <FormField
-            name="middleName"
-            label="По батькові"
+            name={FORM_FIELDS.middleName.name}
+            label={FORM_FIELDS.middleName.label}
             required={hasMiddleName}
             disabled={!hasMiddleName}
             extra={<ToggleSwitch checked={hasMiddleName} onChange={handleMiddleNameToggle} />}
@@ -51,8 +51,8 @@ export function PatientDataSection() {
           </FormField>
 
           <FormField
-            name="taxId"
-            label="РНОКПП (ІПН)"
+            name={FORM_FIELDS.taxId.name}
+            label={FORM_FIELDS.taxId.label}
             required={hasTaxId}
             disabled={!hasTaxId}
             extra={<ToggleSwitch checked={hasTaxId} onChange={handleTaxIdToggle} />}
@@ -61,7 +61,7 @@ export function PatientDataSection() {
             {(props) => <TextInput {...props} maxLength={10} inputMode="numeric" />}
           </FormField>
 
-          <FormField name="birthDate" label="Дата народження" required>
+          <FormField name={FORM_FIELDS.birthDate.name} label={FORM_FIELDS.birthDate.label} required>
             {({ value, onChange, onBlur, hasError, disabled }) => (
               <DateInput
                 value={value}
@@ -73,7 +73,7 @@ export function PatientDataSection() {
             )}
           </FormField>
 
-          <FormField name="gender" label="Стать" required>
+          <FormField name={FORM_FIELDS.gender.name} label={FORM_FIELDS.gender.label} required>
             {({ id, name, value, onChange, onBlur, hasError, disabled }) => (
               <SelectInput
                 id={id}
@@ -84,22 +84,22 @@ export function PatientDataSection() {
                 hasError={hasError}
                 disabled={disabled}
                 options={GENDER_OPTIONS}
-                placeholder="- Вибрати -"
+                placeholder={SELECT_PLACEHOLDER}
               />
             )}
           </FormField>
         </div>
 
         <div className={clsx(styles.section__grid, styles['section__grid--two-col'])}>
-          <FormField name="birthCountry" label="Країна народження" required>
+          <FormField name={FORM_FIELDS.birthCountry.name} label={FORM_FIELDS.birthCountry.label} required>
             {(props) => <TextInput {...props} />}
           </FormField>
 
-          <FormField name="birthPlace" label="Місце народження" required>
+          <FormField name={FORM_FIELDS.birthPlace.name} label={FORM_FIELDS.birthPlace.label} required>
             {(props) => <TextInput {...props} />}
           </FormField>
 
-          <FormField name="contactMethod" label="Бажаний спосіб зв'язку із пацієнтом">
+          <FormField name={FORM_FIELDS.contactMethod.name} label={FORM_FIELDS.contactMethod.label}>
             {({ id, name, value, onChange, onBlur, hasError, disabled }) => (
               <SelectInput
                 id={id}
@@ -110,16 +110,16 @@ export function PatientDataSection() {
                 hasError={hasError}
                 disabled={disabled}
                 options={CONTACT_METHOD_OPTIONS}
-                placeholder="- Вибрати -"
+                placeholder={SELECT_PLACEHOLDER}
               />
             )}
           </FormField>
 
-          <FormField name="secretWord" label="Секретне слово (не менше 6 символів)" required>
+          <FormField name={FORM_FIELDS.secretWord.name} label={FORM_FIELDS.secretWord.label} required>
             {(props) => <TextInput {...props} type="password" />}
           </FormField>
 
-          <FormField name="phone" label="Контактний номер телефону">
+          <FormField name={FORM_FIELDS.phone.name} label={FORM_FIELDS.phone.label}>
             {({ id, value, onChange, onBlur, hasError, disabled, name }) => (
               <PhoneInput
                 id={id}
@@ -133,8 +133,8 @@ export function PatientDataSection() {
             )}
           </FormField>
 
-          <FormField name="email" label="Адреса електронної пошти">
-            {(props) => <TextInput {...props} type="email" placeholder="example@example.com" />}
+          <FormField name={FORM_FIELDS.email.name} label={FORM_FIELDS.email.label}>
+            {(props) => <TextInput {...props} type="email" placeholder={FORM_FIELDS.email.placeholder} />}
           </FormField>
         </div>
       </div>

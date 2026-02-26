@@ -8,15 +8,16 @@ import {
 } from '@/shared/ui';
 
 import { DOCUMENT_TYPE_OPTIONS } from '../../constants/documentTypes';
+import { FORM_FIELDS, SECTION_TITLES, SELECT_PLACEHOLDER } from '../../constants/formContent';
 import styles from './DocumentSection.module.scss';
 
 export function DocumentSection() {
   return (
     <section className={styles.section}>
-      <h2 className={styles.section__title}>Документ, що посвідчує особу</h2>
+      <h2 className={styles.section__title}>{SECTION_TITLES.document}</h2>
 
       <div className={styles.section__grid}>
-        <FormField name="documentType" label="Тип документу" required>
+        <FormField name={FORM_FIELDS.documentType.name} label={FORM_FIELDS.documentType.label} required>
           {({ id, name, value, onChange, onBlur, hasError, disabled }) => (
             <SelectInput
               id={id}
@@ -27,16 +28,16 @@ export function DocumentSection() {
               hasError={hasError}
               disabled={disabled}
               options={DOCUMENT_TYPE_OPTIONS}
-              placeholder="- Вибрати -"
+              placeholder={SELECT_PLACEHOLDER}
             />
           )}
         </FormField>
 
-        <FormField name="documentNumber" label="Серія (за наявності), номер" required>
+        <FormField name={FORM_FIELDS.documentNumber.name} label={FORM_FIELDS.documentNumber.label} required>
           {(props) => <TextInput {...props} />}
         </FormField>
 
-        <FormField name="documentIssuedDate" label="Коли видано" required>
+        <FormField name={FORM_FIELDS.documentIssuedDate.name} label={FORM_FIELDS.documentIssuedDate.label} required>
           {({ value, onChange, onBlur, hasError, disabled }) => (
             <DateInput
               value={value}
@@ -48,7 +49,7 @@ export function DocumentSection() {
           )}
         </FormField>
 
-        <FormField name="documentValidUntil" label="Діє до">
+        <FormField name={FORM_FIELDS.documentValidUntil.name} label={FORM_FIELDS.documentValidUntil.label}>
           {({ value, onChange, onBlur, hasError, disabled }) => (
             <DateInput
               value={value}
@@ -60,7 +61,7 @@ export function DocumentSection() {
           )}
         </FormField>
 
-        <FormField name="documentIssuedBy" label="Ким видано" required>
+        <FormField name={FORM_FIELDS.documentIssuedBy.name} label={FORM_FIELDS.documentIssuedBy.label} required>
           {({ value, onChange, onBlur, hasError, name }) => (
             <TextareaInput
               value={value}
@@ -72,11 +73,7 @@ export function DocumentSection() {
           )}
         </FormField>
 
-        <FormField
-          name="unzr"
-          label="Запис № (УНЗР)"
-          hint="Вкажіть унікальний номер запису в Демографічному реєстрі (Запис №)"
-        >
+        <FormField name={FORM_FIELDS.unzr.name} label={FORM_FIELDS.unzr.label} hint={FORM_FIELDS.unzr.hint}>
           {(props) => <UnzrInput {...props} />}
         </FormField>
       </div>

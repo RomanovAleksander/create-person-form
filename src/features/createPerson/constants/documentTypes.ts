@@ -10,13 +10,7 @@ export const DOCUMENT_TYPE_OPTIONS: SelectOption[] = [
   { value: 'temporary_certificate', label: 'Тимчасове посвідчення громадянина України' },
 ];
 
-export const DOCUMENT_TYPES = {
+export const PASSPORT_TYPES = {
   PASSPORT: 'passport',
   PASSPORT_BOOK: 'passport_book',
 } as const;
-
-export const PASSPORT_TYPES = new Set<string>(Object.values(DOCUMENT_TYPES));
-
-export function isPassportType(documentType: string): boolean {
-  return PASSPORT_TYPES.has(documentType);
-}

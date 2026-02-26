@@ -1,7 +1,8 @@
 import { isBefore, isValid, parse, startOfToday } from 'date-fns';
 import { z } from 'zod';
 
-import { DOCUMENT_TYPES } from '../constants/documentTypes';
+import { PASSPORT_TYPES } from '../constants/documentTypes';
+import { FIELD_NAMES } from '../constants/formContent';
 
 const SECRET_WORD_MIN_LENGTH = 6;
 const PHONE_MASK_FULL_LENGTH = 19; // "+38 (0XX) XXX-XX-XX"
@@ -106,7 +107,7 @@ export const createPersonSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: MSG.required,
-        path: ['middleName']
+        path: [FIELD_NAMES.middleName]
       });
     }
 
@@ -115,13 +116,13 @@ export const createPersonSchema = z
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: MSG.required,
-          path: ['taxId']
+          path: [FIELD_NAMES.taxId]
         });
       } else if (!taxIdRegex.test(data.taxId)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: MSG.taxIdFormat,
-          path: ['taxId']
+          path: [FIELD_NAMES.taxId]
         });
       }
     }
@@ -133,7 +134,7 @@ export const createPersonSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: MSG.docIssuedBeforeBirth,
-        path: ['documentIssuedDate'],
+        path: [FIELD_NAMES.documentIssuedDate],
       });
     }
 
@@ -143,12 +144,12 @@ export const createPersonSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: MSG.docValidUntilBeforeIssued,
-        path: ['documentValidUntil'],
+        path: [FIELD_NAMES.documentValidUntil],
       });
     }
 
     if (data.documentNumber && data.documentType) {
-      const { PASSPORT, PASSPORT_BOOK } = DOCUMENT_TYPES;
+      const { PASSPORT, PASSPORT_BOOK } = PASSPORT_TYPES;
 
       let regex = documentSerialRegex;
       let errorMsg: string = MSG.docNumFormat;
@@ -165,7 +166,7 @@ export const createPersonSchema = z
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: errorMsg,
-          path: ['documentNumber']
+          path: [FIELD_NAMES.documentNumber]
         });
       }
     }
