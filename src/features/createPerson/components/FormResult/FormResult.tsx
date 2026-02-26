@@ -2,7 +2,7 @@ import type { CreatePersonFormValues } from '../../validation/createPersonSchema
 import styles from './FormResult.module.scss';
 
 interface FormResultProps {
-  data: CreatePersonFormValues;
+  data: Partial<CreatePersonFormValues>;
 }
 
 export function FormResult({ data }: FormResultProps) {

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { Form } from 'react-final-form';
 
 import { Button } from '@/shared/ui';
@@ -17,11 +17,15 @@ import styles from './CreatePersonForm.module.scss';
 const validate = zodAdapter(createPersonSchema);
 
 export function CreatePersonForm() {
-  const [submittedData, setSubmittedData] = useState<CreatePersonFormValues | null>(null);
+  const [submittedData, setSubmittedData] = useState<Partial<CreatePersonFormValues> | null>(null);
 
-  const handleSubmit = useCallback((values: CreatePersonFormValues) => {
-    setSubmittedData(values);
-  }, []);
+  const handleSubmit = (values: CreatePersonFormValues) => {
+    const cleanedValues = Object.fromEntries(
+      Object.entries(values).filter(([_, value]) => value !== '')
+    ) as Partial<CreatePersonFormValues>;
+
+    setSubmittedData(cleanedValues);
+  };
 
   return (
     <>
