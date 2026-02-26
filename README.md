@@ -12,8 +12,10 @@ A registration form implementation for personal and document data featuring dyna
 | **Build Tool** | Vite 6 |
 | **Form Management** | react-final-form + final-form |
 | **Validation** | Zod 3 |
+| **Select** | react-select |
 | **Input Masking** | react-imask |
-| **Styling** | SCSS Modules (BEM) + Mixins |
+| **Styling** | SCSS Modules, clsx |
+| **Date Utilities** | date-fns |
 
 ---
 
